@@ -30,6 +30,11 @@
     "react-hooks",
     "@typescript-eslint"
   ],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"]
+    }
+  ],
   "rules": {
     "import/first": "error",
     "import/newline-after-import": "error",
