@@ -23,8 +23,6 @@ export const Dashboard = (): JSX.Element => {
   const dispatch = useAppDispatch()
   const users = useAppSelector((state) => state.users)
 
-  console.log(users)
-
   useEffect(() => {
     const loadUsers = async (): Promise<void> => {
       if (users.length > 0) return

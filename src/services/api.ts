@@ -21,6 +21,28 @@ export const get = async <T>(params?: string): Promise<T> => {
   return await fetchApi({ url: String(url), options })
 }
 
+export const post = async <T>(body: T): Promise<T> => {
+  return await fetchApi({
+    url: BASE_URL,
+    options: {
+      ...options,
+      method: 'post',
+      body: JSON.stringify(body)
+    }
+  })
+}
+
+export const put = async <T>(id: number, body: T): Promise<T> => {
+  return await fetchApi({
+    url: `${BASE_URL}/${id}`,
+    options: {
+      ...options,
+      method: 'put',
+      body: JSON.stringify(body)
+    }
+  })
+}
+
 export const fetchApi = async <T>({ url, options }: FetchProps): Promise<T> => {
   return await fetch(url, options).then(async (response) => {
     if (!response.ok) {

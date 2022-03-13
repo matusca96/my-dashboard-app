@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@faker-js/faker": "^6.0.0-beta.0",
     "@radix-ui/colors": "^0.1.8",
     "@radix-ui/react-icons": "^1.1.0",
     "@radix-ui/react-scroll-area": "^0.1.4",
