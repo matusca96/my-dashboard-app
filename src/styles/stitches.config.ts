@@ -60,7 +60,7 @@ const { styled, css, createTheme, globalCss } = createStitches({
   }
 })
 
-export const darkTheme = createTheme('dark-theme', {
+export const darkTheme = createTheme('dark', {
   colors: {
     ...indigoDark,
     ...redDark,
