@@ -1,5 +1,9 @@
+import { useEffect } from 'react'
 import { Pencil1Icon, PlusIcon, TrashIcon } from '@radix-ui/react-icons'
 import { useNavigate } from 'react-router-dom'
+
+import { useAppDispatch, useAppSelector } from '../../config/redux/store'
+import { saveUsers } from '../../slices/dashboardSlice'
 
 import { Box, Flex, Separator, Text } from '../../components/Primitives'
 import { Header } from '../../components/Header'
@@ -11,6 +15,8 @@ import { Table, Tbody, Td, Th, Thead, Tr } from './styles'
 
 export const Dashboard = (): JSX.Element => {
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const users = useAppSelector((state) => state.users)
 
   return (
     <Flex

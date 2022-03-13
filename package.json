@@ -12,12 +12,15 @@
     "@radix-ui/react-icons": "^1.1.0",
     "@radix-ui/react-scroll-area": "^0.1.4",
     "@radix-ui/react-separator": "^0.1.4",
+    "@reduxjs/toolkit": "^1.8.0",
     "@stitches/react": "^1.2.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
     "react-router-dom": "6"
   },
   "devDependencies": {
+    "@types/node": "^17.0.21",
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
