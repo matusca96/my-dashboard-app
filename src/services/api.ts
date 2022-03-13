@@ -43,6 +43,16 @@ export const put = async <T>(id: number, body: T): Promise<T> => {
   })
 }
 
+export const deleteMethod = async <T>(id: number): Promise<T> => {
+  return await fetchApi({
+    url: `${BASE_URL}/${id}`,
+    options: {
+      ...options,
+      method: 'delete'
+    }
+  })
+}
+
 export const fetchApi = async <T>({ url, options }: FetchProps): Promise<T> => {
   return await fetch(url, options).then(async (response) => {
     if (!response.ok) {

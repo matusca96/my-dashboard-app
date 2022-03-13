@@ -3,7 +3,7 @@ import { Pencil1Icon, PlusIcon, TrashIcon } from '@radix-ui/react-icons'
 import { useNavigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../config/redux/store'
-import { saveUsers } from '../../slices/dashboardSlice'
+import { checkFirstTimeLoaded, saveUsers } from '../../slices/dashboardSlice'
 
 import * as api from '../../services/api'
 
@@ -12,20 +12,39 @@ import { Header } from '../../components/Header'
 import { Button } from '../../components/Button'
 import { ScrollArea } from '../../components/ScrollArea'
 import { IconButton } from '../../components/IconButton'
+import { Spinner } from '../../components/Spinner'
+import { Modal } from '../../components/Modal'
 
 import { Table, Tbody, Td, TdNoResults, Th, Thead, Tr } from './styles'
-import { Spinner } from '../../components/Spinner'
 
 export const Dashboard = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false)
+  const [selectedUser, setSelectedUser] = useState<Dashboard.User | undefined>(
+    undefined
+  )
 
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const users = useAppSelector((state) => state.users)
+  const { users, firstTimeLoaded } = useAppSelector((state) => state)
+
+  const handleOnDeleteUser = async (): Promise<void> => {
+    if (!selectedUser) return
+
+    try {
+      await api.deleteMethod(selectedUser.id)
+
+      const updatedUsers = users.filter((user) => user.id !== selectedUser.id)
+
+      dispatch(saveUsers(updatedUsers))
+      setSelectedUser(undefined)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   useEffect(() => {
     const loadUsers = async (): Promise<void> => {
-      if (users.length > 0) return
+      if (firstTimeLoaded) return
 
       try {
         setIsLoading(true)
@@ -33,6 +52,7 @@ export const Dashboard = (): JSX.Element => {
         const response = await api.get<Dashboard.User[]>()
 
         dispatch(saveUsers(response))
+        dispatch(checkFirstTimeLoaded(true))
       } catch (err) {
         console.log(err)
       } finally {
@@ -146,6 +166,7 @@ export const Dashboard = (): JSX.Element => {
                             color="red"
                             variant="ghost"
                             icon={<TrashIcon />}
+                            onClick={() => setSelectedUser(user)}
                           />
                         </Td>
                       </Tr>
@@ -157,6 +178,32 @@ export const Dashboard = (): JSX.Element => {
           )}
         </Flex>
       </Flex>
+
+      <Modal
+        open={!!selectedUser}
+        title="Warning!"
+        description={`Do you really want to delete the user '${
+          selectedUser?.name ?? ''
+        }'?`}
+        onClose={() => setSelectedUser(undefined)}
+      >
+        <Flex css={{ ml: 'auto', gap: '$2', width: '180px' }}>
+          <Button
+            css={{ flex: 1 }}
+            color="main"
+            onClick={() => setSelectedUser(undefined)}
+          >
+            Cancel
+          </Button>
+          <Button
+            css={{ flex: 1 }}
+            color="warning"
+            onClick={handleOnDeleteUser}
+          >
+            Delete
+          </Button>
+        </Flex>
+      </Modal>
     </Flex>
   )
 }

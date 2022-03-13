@@ -1,4 +1,5 @@
 import { ComponentProps } from '@stitches/react'
+import { forwardRef, ForwardRefRenderFunction } from 'react'
 
 import { Button } from './styles'
 
@@ -6,6 +7,15 @@ interface Props extends ComponentProps<typeof Button> {
   icon: React.ReactNode
 }
 
-export const IconButton = ({ icon, ...rest }: Props): JSX.Element => {
-  return <Button {...rest}>{icon}</Button>
+const BaseIconButton: ForwardRefRenderFunction<HTMLButtonElement, Props> = (
+  { icon, ...rest },
+  ref
+): JSX.Element => {
+  return (
+    <Button ref={ref} {...rest}>
+      {icon}
+    </Button>
+  )
 }
+
+export const IconButton = forwardRef(BaseIconButton)
