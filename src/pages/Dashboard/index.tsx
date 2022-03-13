@@ -1,14 +1,14 @@
-import { PlusIcon } from '@radix-ui/react-icons'
+import { Pencil1Icon, PlusIcon, TrashIcon } from '@radix-ui/react-icons'
 
-import useTheme from '../../hooks/useTheme'
-
-import { Flex, Separator, Text } from '../../components/Primitives'
+import { Box, Flex, Separator, Text } from '../../components/Primitives'
 import { Header } from '../../components/Header'
 import { Button } from '../../components/Button'
+import { ScrollArea } from '../../components/ScrollArea'
+import { IconButton } from '../../components/IconButton'
+
+import { Table, Tbody, Td, Th, Thead, Tr } from './styles'
 
 export const Dashboard = (): JSX.Element => {
-  const { theme } = useTheme()
-
   return (
     <Flex
       css={{
@@ -17,7 +17,9 @@ export const Dashboard = (): JSX.Element => {
         maxWidth: '1200px',
         mx: 'auto',
         px: '$4',
-        pb: '$4'
+        pb: '$4',
+
+        overflow: 'hidden'
       }}
     >
       <Header />
@@ -29,6 +31,9 @@ export const Dashboard = (): JSX.Element => {
 
           flexDirection: 'column',
           alignItems: 'center',
+          justifyContent: 'center',
+
+          overflow: 'hidden',
 
           p: '$3',
 
@@ -46,6 +51,49 @@ export const Dashboard = (): JSX.Element => {
         </Flex>
 
         <Separator css={{ m: '$2' }} />
+
+        <Box
+          css={{
+            borderRadius: '$2',
+            mt: '$3',
+
+            width: '100%',
+            flex: 1,
+            overflow: 'hidden'
+          }}
+        >
+          <ScrollArea>
+            <Table>
+              <Thead>
+                <Tr>
+                  <Th>Id</Th>
+                  <Th>Name</Th>
+                  <Th>Username</Th>
+                  <Th>City</Th>
+                  <Th>Email</Th>
+                  <Th />
+                  <Th />
+                </Tr>
+              </Thead>
+
+              <Tbody>
+                <Tr>
+                  <Td>1</Td>
+                  <Td>Matheus</Td>
+                  <Td>Matusca</Td>
+                  <Td>Itapetininga</Td>
+                  <Td>gomesloud@gmail.com</Td>
+                  <Td>
+                    <IconButton color="teal" icon={<Pencil1Icon />} />
+                  </Td>
+                  <Td>
+                    <IconButton color="red" icon={<TrashIcon />} />
+                  </Td>
+                </Tr>
+              </Tbody>
+            </Table>
+          </ScrollArea>
+        </Box>
       </Flex>
     </Flex>
   )

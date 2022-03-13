@@ -8,9 +8,7 @@ export const Flex = styled('div', {
 })
 
 export const Text = styled('span', {
-  color: '$slate12',
-
-  transition: '$fast'
+  color: '$slate12'
 })
 
 export const Separator = styled(SeparatorPrimitive.Root, {

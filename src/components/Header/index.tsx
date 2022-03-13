@@ -13,6 +13,7 @@ export const Header = (): JSX.Element => {
     <Container>
       <Title>MyDashboard</Title>
       <IconButton
+        variant="ghost"
         icon={theme === 'dark' ? <MoonIcon /> : <SunIcon />}
         onClick={toggleTheme}
       />

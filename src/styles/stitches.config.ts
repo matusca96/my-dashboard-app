@@ -3,10 +3,12 @@ import {
   slate,
   red,
   green,
+  teal,
   whiteA,
   slateDark,
   redDark,
-  greenDark
+  greenDark,
+  tealDark
 } from '@radix-ui/colors'
 
 const { styled, css, createTheme, globalCss } = createStitches({
@@ -15,7 +17,8 @@ const { styled, css, createTheme, globalCss } = createStitches({
       ...red,
       ...green,
       ...slate,
-      ...whiteA
+      ...whiteA,
+      ...teal
     },
     fonts: {
       inter: 'Inter, sans-serif'
@@ -118,7 +121,8 @@ export const darkTheme = createTheme('dark', {
   colors: {
     ...redDark,
     ...greenDark,
-    ...slateDark
+    ...slateDark,
+    ...tealDark
   }
 })
 
@@ -127,10 +131,14 @@ export const globalStyles = globalCss({
     margin: 0,
     padding: 0,
     boxSizing: 'border-box',
-    fontSmooth: 'always'
-  },
-  body: {
+    fontSmooth: 'always',
     fontFamily: '$inter'
+  },
+
+  'body, h1, strong, span, button, table, thead, tbody, th, tr, td': {
+    fontFamily: '$inter',
+
+    transition: '$fast'
   }
 })
 

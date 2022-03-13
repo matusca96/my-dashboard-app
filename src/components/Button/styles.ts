@@ -12,7 +12,6 @@ export const Button = styled('button', {
 
   border: 0,
 
-  transition: '$fast',
   cursor: 'pointer',
 
   variants: {
@@ -20,8 +19,6 @@ export const Button = styled('button', {
       main: {
         bg: '$slate4',
         color: '$slate12',
-
-        fontFamily: '$inter',
 
         '&:hover': {
           bg: '$slate5'

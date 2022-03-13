@@ -14,6 +14,7 @@ export const App = (): JSX.Element => {
           width: '100%',
           height: '100%',
           bg: '$slate1',
+
           transition: '$fast'
         }}
       >
