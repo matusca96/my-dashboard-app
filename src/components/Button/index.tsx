@@ -2,7 +2,7 @@ import { ComponentProps } from '@stitches/react'
 import { Button as BaseButton } from './styles'
 
 interface Props extends ComponentProps<typeof BaseButton> {
-  leftIcon: React.ReactNode
+  leftIcon?: React.ReactNode
   children: string
 }
 

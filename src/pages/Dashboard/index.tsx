@@ -1,4 +1,5 @@
 import { Pencil1Icon, PlusIcon, TrashIcon } from '@radix-ui/react-icons'
+import { useNavigate } from 'react-router-dom'
 
 import { Box, Flex, Separator, Text } from '../../components/Primitives'
 import { Header } from '../../components/Header'
@@ -9,6 +10,8 @@ import { IconButton } from '../../components/IconButton'
 import { Table, Tbody, Td, Th, Thead, Tr } from './styles'
 
 export const Dashboard = (): JSX.Element => {
+  const navigate = useNavigate()
+
   return (
     <Flex
       css={{
@@ -47,7 +50,9 @@ export const Dashboard = (): JSX.Element => {
           <Text css={{ fontWeight: '$bold', fontSize: '$5', flex: 1 }}>
             Users
           </Text>
-          <Button leftIcon={<PlusIcon />}>New user</Button>
+          <Button leftIcon={<PlusIcon />} onClick={() => navigate('/add')}>
+            New user
+          </Button>
         </Flex>
 
         <Separator css={{ m: '$2' }} />
@@ -84,10 +89,19 @@ export const Dashboard = (): JSX.Element => {
                   <Td>Itapetininga</Td>
                   <Td>gomesloud@gmail.com</Td>
                   <Td>
-                    <IconButton color="teal" icon={<Pencil1Icon />} />
+                    <IconButton
+                      color="teal"
+                      variant="ghost"
+                      icon={<Pencil1Icon />}
+                      onClick={() => navigate('/edit/1')}
+                    />
                   </Td>
                   <Td>
-                    <IconButton color="red" icon={<TrashIcon />} />
+                    <IconButton
+                      color="red"
+                      variant="ghost"
+                      icon={<TrashIcon />}
+                    />
                   </Td>
                 </Tr>
               </Tbody>

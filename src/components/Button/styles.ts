@@ -26,6 +26,30 @@ export const Button = styled('button', {
         '&:active': {
           bg: '$slate6'
         }
+      },
+
+      warning: {
+        bg: '$red5',
+        color: '$slate12',
+
+        '&:hover': {
+          bg: '$red6'
+        },
+        '&:active': {
+          bg: '$red7'
+        }
+      },
+
+      success: {
+        bg: '$green5',
+        color: '$slate12',
+
+        '&:hover': {
+          bg: '$green6'
+        },
+        '&:active': {
+          bg: '$green7'
+        }
       }
     }
   },

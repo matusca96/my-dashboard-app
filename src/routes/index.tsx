@@ -9,7 +9,15 @@ export const Routes = (): JSX.Element => {
     <Router>
       <Route path="/" element={<Dashboard />} />
       <Route path="add" element={<AddUser />} />
-      <Route path="edit" element={<EditUser />} />
+      <Route path="edit/:id" element={<EditUser />} />
+      <Route
+        path="*"
+        element={
+          <main style={{ padding: '1rem' }}>
+            <p>Theres nothing here!</p>
+          </main>
+        }
+      />
     </Router>
   )
 }
