@@ -1,19 +1,23 @@
-import { ThemeProvider } from './contexts/ThemeProvider'
+import { ThemeProvider } from './contexts/ThemeContext'
+import { Routes } from './routes'
+import { Box } from './components/Box'
 
-import { globalStyles, styled } from './styles/stitches.config'
-
-const Box = styled('div', {
-  backgroundColor: '$indigo2',
-  color: '$slate12',
-  height: '100vh'
-})
+import { globalStyles } from './styles/stitches.config'
 
 export const App = (): JSX.Element => {
   globalStyles()
 
   return (
     <ThemeProvider>
-      <Box>My Dashboard App</Box>
+      <Box
+        css={{
+          backgroundColor: '$indigo2',
+          height: '100vh',
+          transition: '$fast'
+        }}
+      >
+        <Routes />
+      </Box>
     </ThemeProvider>
   )
 }

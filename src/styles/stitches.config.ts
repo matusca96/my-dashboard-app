@@ -1,9 +1,10 @@
-import { createStitches } from '@stitches/react'
+import { createStitches, PropertyValue } from '@stitches/react'
 import {
   indigo,
   slate,
   red,
   green,
+  whiteA,
   indigoDark,
   slateDark,
   redDark,
@@ -16,7 +17,8 @@ const { styled, css, createTheme, globalCss } = createStitches({
       ...indigo,
       ...red,
       ...green,
-      ...slate
+      ...slate,
+      ...whiteA
     },
     fonts: {
       inter: 'Inter, sans-serif'
@@ -56,7 +58,59 @@ const { styled, css, createTheme, globalCss } = createStitches({
       2: '4px',
       3: '8px',
       round: '9999px'
+    },
+    transitions: {
+      fast: 'all, 0.25s ease-in-out',
+      normal: 'all, 0.5s ease-in-out'
     }
+  },
+  utils: {
+    m: (value: PropertyValue<'margin'>) => ({
+      margin: value
+    }),
+    mt: (value: PropertyValue<'margin'>) => ({
+      marginTop: value
+    }),
+    mr: (value: PropertyValue<'margin'>) => ({
+      marginRight: value
+    }),
+    mb: (value: PropertyValue<'margin'>) => ({
+      marginBottom: value
+    }),
+    ml: (value: PropertyValue<'margin'>) => ({
+      marginLeft: value
+    }),
+    mx: (value: PropertyValue<'margin'>) => ({
+      marginLeft: value,
+      marginRight: value
+    }),
+    my: (value: PropertyValue<'margin'>) => ({
+      marginTop: value,
+      marginBottom: value
+    }),
+    p: (value: PropertyValue<'padding'>) => ({
+      padding: value
+    }),
+    pt: (value: PropertyValue<'padding'>) => ({
+      paddingTop: value
+    }),
+    pr: (value: PropertyValue<'padding'>) => ({
+      paddingRight: value
+    }),
+    pb: (value: PropertyValue<'padding'>) => ({
+      paddingBottom: value
+    }),
+    pl: (value: PropertyValue<'padding'>) => ({
+      paddingLeft: value
+    }),
+    px: (value: PropertyValue<'padding'>) => ({
+      paddingLeft: value,
+      paddingRight: value
+    }),
+    py: (value: PropertyValue<'padding'>) => ({
+      paddingTop: value,
+      paddingBottom: value
+    })
   }
 })
 
