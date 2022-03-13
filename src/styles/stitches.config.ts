@@ -1,11 +1,9 @@
 import { createStitches, PropertyValue } from '@stitches/react'
 import {
-  indigo,
   slate,
   red,
   green,
   whiteA,
-  indigoDark,
   slateDark,
   redDark,
   greenDark
@@ -14,7 +12,6 @@ import {
 const { styled, css, createTheme, globalCss } = createStitches({
   theme: {
     colors: {
-      ...indigo,
       ...red,
       ...green,
       ...slate,
@@ -110,13 +107,15 @@ const { styled, css, createTheme, globalCss } = createStitches({
     py: (value: PropertyValue<'padding'>) => ({
       paddingTop: value,
       paddingBottom: value
+    }),
+    bg: (value: PropertyValue<'backgroundColor'>) => ({
+      backgroundColor: value
     })
   }
 })
 
 export const darkTheme = createTheme('dark', {
   colors: {
-    ...indigoDark,
     ...redDark,
     ...greenDark,
     ...slateDark

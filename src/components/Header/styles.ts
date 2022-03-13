@@ -8,7 +8,7 @@ export const Container = styled('div', {
 
 export const Title = styled('h1', {
   fontWeight: '$bold',
-  color: '$indigo12',
+  color: '$slate12',
 
   flex: 1
 })

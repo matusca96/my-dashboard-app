@@ -1,10 +1,9 @@
-import { ReactNode } from 'react'
 import { ComponentProps } from '@stitches/react'
 
 import { Button } from './styles'
 
 interface Props extends ComponentProps<typeof Button> {
-  icon: ReactNode
+  icon: React.ReactNode
 }
 
 export const IconButton = ({ icon, ...rest }: Props): JSX.Element => {

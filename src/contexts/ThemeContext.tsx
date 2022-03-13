@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
+import { Box } from '../components/Primitives'
 import { darkTheme } from '../styles/stitches.config'
 
 export const ThemeContext = createContext({} as ThemeContext.Data)
@@ -29,7 +30,12 @@ export const ThemeProvider = ({
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div className={theme === 'dark' ? darkTheme : 'light'}>{children}</div>
+      <Box
+        css={{ height: '100vh' }}
+        className={theme === 'dark' ? darkTheme : 'light'}
+      >
+        {children}
+      </Box>
     </ThemeContext.Provider>
   )
 }

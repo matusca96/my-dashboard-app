@@ -1,6 +1,6 @@
 import { ThemeProvider } from './contexts/ThemeContext'
 import { Routes } from './routes'
-import { Box } from './components/Box'
+import { Flex } from './components/Primitives'
 
 import { globalStyles } from './styles/stitches.config'
 
@@ -9,15 +9,16 @@ export const App = (): JSX.Element => {
 
   return (
     <ThemeProvider>
-      <Box
+      <Flex
         css={{
-          backgroundColor: '$indigo2',
-          height: '100vh',
+          width: '100%',
+          height: '100%',
+          bg: '$slate1',
           transition: '$fast'
         }}
       >
         <Routes />
-      </Box>
+      </Flex>
     </ThemeProvider>
   )
 }

@@ -8,32 +8,32 @@ export const Button = styled('button', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  gap: '$2',
 
-  color: '$slate12',
+  border: 0,
 
   transition: '$fast',
   cursor: 'pointer',
 
   variants: {
-    variant: {
-      ghost: {
-        border: '2px solid transparent',
-        backgroundColor: 'transparent',
+    color: {
+      main: {
+        bg: '$slate4',
+        color: '$slate12',
+
+        fontFamily: '$inter',
 
         '&:hover': {
-          backgroundColor: '$slate3'
+          bg: '$slate5'
         },
         '&:active': {
-          backgroundColor: '$slate4'
-        },
-        '&:focus': {
-          border: '2px solid $slate8'
+          bg: '$slate6'
         }
       }
     }
   },
 
   defaultVariants: {
-    variant: 'ghost'
+    color: 'main'
   }
 })
