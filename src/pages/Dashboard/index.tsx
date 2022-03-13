@@ -7,16 +7,17 @@ import { saveUsers } from '../../slices/dashboardSlice'
 
 import * as api from '../../services/api'
 
-import { Box, Flex, Separator, Text } from '../../components/Primitives'
+import { Flex, Separator, Text } from '../../components/Primitives'
 import { Header } from '../../components/Header'
 import { Button } from '../../components/Button'
 import { ScrollArea } from '../../components/ScrollArea'
 import { IconButton } from '../../components/IconButton'
 
-import { Table, Tbody, Td, Th, Thead, Tr } from './styles'
+import { Table, Tbody, Td, TdNoResults, Th, Thead, Tr } from './styles'
+import { Spinner } from '../../components/Spinner'
 
 export const Dashboard = (): JSX.Element => {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -36,6 +37,8 @@ export const Dashboard = (): JSX.Element => {
         dispatch(saveUsers(response))
       } catch (err) {
         console.log(err)
+      } finally {
+        setIsLoading(false)
       }
     }
 
@@ -87,59 +90,74 @@ export const Dashboard = (): JSX.Element => {
 
         <Separator css={{ m: '$2' }} />
 
-        <Box
+        <Flex
           css={{
             borderRadius: '$2',
             mt: '$3',
+
+            alignItems: 'center',
+            justifyContent: 'center',
 
             width: '100%',
             flex: 1,
             overflow: 'hidden'
           }}
         >
-          <ScrollArea>
-            <Table>
-              <Thead>
-                <Tr>
-                  <Th>Id</Th>
-                  <Th>Name</Th>
-                  <Th>Username</Th>
-                  <Th>City</Th>
-                  <Th>Email</Th>
-                  <Th />
-                  <Th />
-                </Tr>
-              </Thead>
-
-              <Tbody>
-                {users.map((user) => (
-                  <Tr key={user.id}>
-                    <Td>{user.id}</Td>
-                    <Td>{user.name}</Td>
-                    <Td>{user.username}</Td>
-                    <Td>{user.address.city}</Td>
-                    <Td>{user.email}</Td>
-                    <Td>
-                      <IconButton
-                        color="teal"
-                        variant="ghost"
-                        icon={<Pencil1Icon />}
-                        onClick={() => navigate('/edit/1')}
-                      />
-                    </Td>
-                    <Td>
-                      <IconButton
-                        color="red"
-                        variant="ghost"
-                        icon={<TrashIcon />}
-                      />
-                    </Td>
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <ScrollArea>
+              <Table>
+                <Thead>
+                  <Tr>
+                    <Th>Id</Th>
+                    <Th>Name</Th>
+                    <Th>Username</Th>
+                    <Th>City</Th>
+                    <Th>Email</Th>
+                    <Th />
+                    <Th />
                   </Tr>
-                ))}
-              </Tbody>
-            </Table>
-          </ScrollArea>
-        </Box>
+                </Thead>
+
+                <Tbody>
+                  {users.length <= 0 ? (
+                    <Tr>
+                      <TdNoResults colSpan={7}>
+                        No users were found. 😢
+                      </TdNoResults>
+                    </Tr>
+                  ) : (
+                    users.map((user) => (
+                      <Tr key={user.id}>
+                        <Td>{user.id}</Td>
+                        <Td>{user.name}</Td>
+                        <Td>{user.username}</Td>
+                        <Td>{user.address.city}</Td>
+                        <Td>{user.email.toLowerCase()}</Td>
+                        <Td>
+                          <IconButton
+                            color="teal"
+                            variant="ghost"
+                            icon={<Pencil1Icon />}
+                            onClick={() => navigate('/edit/1')}
+                          />
+                        </Td>
+                        <Td>
+                          <IconButton
+                            color="red"
+                            variant="ghost"
+                            icon={<TrashIcon />}
+                          />
+                        </Td>
+                      </Tr>
+                    ))
+                  )}
+                </Tbody>
+              </Table>
+            </ScrollArea>
+          )}
+        </Flex>
       </Flex>
     </Flex>
   )

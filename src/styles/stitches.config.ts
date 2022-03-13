@@ -5,10 +5,12 @@ import {
   green,
   teal,
   whiteA,
+  crimson,
   slateDark,
   redDark,
   greenDark,
-  tealDark
+  tealDark,
+  crimsonDark
 } from '@radix-ui/colors'
 
 const { styled, css, createTheme, globalCss } = createStitches({
@@ -18,7 +20,8 @@ const { styled, css, createTheme, globalCss } = createStitches({
       ...green,
       ...slate,
       ...whiteA,
-      ...teal
+      ...teal,
+      ...crimson
     },
     fonts: {
       inter: 'Inter, sans-serif'
@@ -129,7 +132,8 @@ export const darkTheme = createTheme('dark', {
     ...redDark,
     ...greenDark,
     ...slateDark,
-    ...tealDark
+    ...tealDark,
+    ...crimsonDark
   }
 })
 

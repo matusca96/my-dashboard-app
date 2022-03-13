@@ -34,6 +34,12 @@ export const Td = styled('td', {
   p: '$3',
 
   textAlign: 'center',
+  color: '$slate12'
+})
 
+export const TdNoResults = styled('td', {
+  p: '$4',
+
+  textAlign: 'center',
   color: '$slate12'
 })
