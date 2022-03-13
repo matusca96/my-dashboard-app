@@ -1,13 +1,16 @@
 import { useParams } from 'react-router-dom'
 
+import { useAppSelector } from '../../config/redux/store'
+
 import { Form } from '../../components/Form'
 import { Header } from '../../components/Header'
 import { Box, Flex, Separator, Text } from '../../components/Primitives'
 
 export const EditUser = (): JSX.Element => {
-  const params = useParams()
+  const params = useParams<'id'>()
+  const users = useAppSelector((state) => state.users)
 
-  console.log(params)
+  const selectedUser = users.find((user) => user.id === Number(params.id))
 
   return (
     <Flex
@@ -55,7 +58,7 @@ export const EditUser = (): JSX.Element => {
             }
           }}
         >
-          <Form />
+          <Form user={selectedUser} />
         </Box>
       </Flex>
     </Flex>

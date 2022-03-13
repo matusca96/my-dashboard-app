@@ -140,7 +140,7 @@ export const Dashboard = (): JSX.Element => {
                             color="teal"
                             variant="ghost"
                             icon={<Pencil1Icon />}
-                            onClick={() => navigate('/edit/1')}
+                            onClick={() => navigate(`/edit/${user.id}`)}
                           />
                         </Td>
                         <Td>
