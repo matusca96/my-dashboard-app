@@ -43,9 +43,10 @@ export const put = async <T>(id: number, body: T): Promise<T> => {
   })
 }
 
-export const deleteMethod = async <T>(id: number): Promise<T> => {
+// fake delete, the json api works only with ids between 1-10
+export const deleteMethod = async <T>(): Promise<T> => {
   return await fetchApi({
-    url: `${BASE_URL}/${id}`,
+    url: `${BASE_URL}/1`,
     options: {
       ...options,
       method: 'delete'

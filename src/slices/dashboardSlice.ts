@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 export interface DashboardState {
   users: Dashboard.User[]
   firstTimeLoaded: boolean
+  totalUsers: number
 }
 
 const initialState: DashboardState = {
   users: [],
-  firstTimeLoaded: false
+  firstTimeLoaded: false,
+  totalUsers: 0
 }
 
 const storeUsers = (
@@ -24,15 +26,24 @@ const storeFirstTimeLoaded = (
   state.firstTimeLoaded = payload
 }
 
+const incrementUsers = (
+  state: DashboardState,
+  { payload }: PayloadAction<number>
+): void => {
+  state.totalUsers += payload
+}
+
 export const dashboardSlice = createSlice({
-  name: 'counter',
+  name: 'dashboard',
   initialState,
   reducers: {
     saveUsers: storeUsers,
-    checkFirstTimeLoaded: storeFirstTimeLoaded
+    checkFirstTimeLoaded: storeFirstTimeLoaded,
+    incrementTotalUsers: incrementUsers
   }
 })
 
-export const { saveUsers, checkFirstTimeLoaded } = dashboardSlice.actions
+export const { saveUsers, checkFirstTimeLoaded, incrementTotalUsers } =
+  dashboardSlice.actions
 
 export default dashboardSlice.reducer

@@ -3,7 +3,11 @@ import { Pencil1Icon, PlusIcon, TrashIcon } from '@radix-ui/react-icons'
 import { useNavigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../config/redux/store'
-import { checkFirstTimeLoaded, saveUsers } from '../../slices/dashboardSlice'
+import {
+  checkFirstTimeLoaded,
+  saveUsers,
+  incrementTotalUsers
+} from '../../slices/dashboardSlice'
 
 import * as api from '../../services/api'
 
@@ -19,6 +23,7 @@ import { Table, Tbody, Td, TdNoResults, Th, Thead, Tr } from './styles'
 
 export const Dashboard = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
   const [selectedUser, setSelectedUser] = useState<Dashboard.User | undefined>(
     undefined
   )
@@ -31,7 +36,8 @@ export const Dashboard = (): JSX.Element => {
     if (!selectedUser) return
 
     try {
-      await api.deleteMethod(selectedUser.id)
+      setIsDeleting(true)
+      await api.deleteMethod()
 
       const updatedUsers = users.filter((user) => user.id !== selectedUser.id)
 
@@ -39,6 +45,8 @@ export const Dashboard = (): JSX.Element => {
       setSelectedUser(undefined)
     } catch (err) {
       console.log(err)
+    } finally {
+      setIsDeleting(false)
     }
   }
 
@@ -53,6 +61,7 @@ export const Dashboard = (): JSX.Element => {
 
         dispatch(saveUsers(response))
         dispatch(checkFirstTimeLoaded(true))
+        dispatch(incrementTotalUsers(response.length))
       } catch (err) {
         console.log(err)
       } finally {
@@ -61,7 +70,7 @@ export const Dashboard = (): JSX.Element => {
     }
 
     loadUsers()
-  }, [dispatch, users])
+  }, [dispatch, firstTimeLoaded])
 
   return (
     <Flex
@@ -198,6 +207,7 @@ export const Dashboard = (): JSX.Element => {
           <Button
             css={{ flex: 1 }}
             color="warning"
+            isLoading={isDeleting}
             onClick={handleOnDeleteUser}
           >
             Delete

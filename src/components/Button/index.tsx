@@ -1,16 +1,22 @@
 import { ComponentProps } from '@stitches/react'
-import { Button as BaseButton } from './styles'
+import { Button as BaseButton, LoadingSpinner } from './styles'
 
 interface Props extends ComponentProps<typeof BaseButton> {
   leftIcon?: React.ReactNode
+  isLoading?: boolean
   children: string
 }
 
-export const Button = ({ leftIcon, children, ...rest }: Props): JSX.Element => {
+export const Button = ({
+  leftIcon,
+  isLoading,
+  children,
+  ...rest
+}: Props): JSX.Element => {
   return (
-    <BaseButton {...rest}>
+    <BaseButton disabled={isLoading} {...rest}>
       {leftIcon}
-      {children}
+      {isLoading ? <LoadingSpinner /> : children}
     </BaseButton>
   )
 }

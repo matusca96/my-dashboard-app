@@ -1,3 +1,4 @@
+import { keyframes } from '@stitches/react'
 import { styled } from '../../styles/stitches.config'
 
 export const Button = styled('button', {
@@ -13,6 +14,12 @@ export const Button = styled('button', {
   border: 0,
 
   cursor: 'pointer',
+
+  '&:disabled': {
+    opacity: '0.6',
+
+    cursor: 'not-allowed'
+  },
 
   variants: {
     color: {
@@ -56,5 +63,29 @@ export const Button = styled('button', {
 
   defaultVariants: {
     color: 'main'
+  }
+})
+
+const spin = keyframes({
+  to: { transform: 'rotate(1turn)' }
+})
+
+export const LoadingSpinner = styled('div', {
+  flex: 1,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+
+  transition: '$fast',
+
+  '&::after': {
+    content: '',
+    position: 'absolute',
+    width: 14,
+    height: 14,
+    border: '2px solid transparent',
+    borderTopColor: '$slate12',
+    borderRadius: '50%',
+    animation: `${String(spin)} .75s linear infinite`
   }
 })
