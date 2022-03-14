@@ -26,6 +26,8 @@ The following tools were used to build the project:
 - [React](https://pt-br.reactjs.org/)
 - [Stitches](https://stitches.dev/)
 - [Radix](https://www.radix-ui.com/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [React Hook Form](https://react-hook-form.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 
 ### Demo 🎲
