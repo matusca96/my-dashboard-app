@@ -11,6 +11,8 @@ import {
 
 import * as api from '../../services/api'
 
+import useToast from '../../hooks/useToast'
+
 import { Flex, Separator, Text } from '../../components/Primitives'
 import { Header } from '../../components/Header'
 import { Button } from '../../components/Button'
@@ -28,6 +30,8 @@ export const Dashboard = (): JSX.Element => {
     undefined
   )
 
+  const { toast } = useToast()
+
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { users, firstTimeLoaded } = useAppSelector((state) => state)
@@ -43,8 +47,18 @@ export const Dashboard = (): JSX.Element => {
 
       dispatch(saveUsers(updatedUsers))
       setSelectedUser(undefined)
+
+      toast({
+        title: 'Success',
+        description: 'The user has been deleted!',
+        status: 'success'
+      })
     } catch (err) {
-      console.log(err)
+      toast({
+        title: 'Error',
+        description: 'An error occurred when trying to delete the user.',
+        status: 'error'
+      })
     } finally {
       setIsDeleting(false)
     }

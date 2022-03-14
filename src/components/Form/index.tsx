@@ -7,6 +7,8 @@ import { incrementTotalUsers, saveUsers } from '../../slices/dashboardSlice'
 
 import * as api from '../../services/api'
 
+import useToast from '../../hooks/useToast'
+
 import { Button } from '../Button'
 import { Input } from '../Input'
 import { Flex } from '../Primitives'
@@ -18,6 +20,8 @@ type Props = {
 }
 
 export const Form = ({ user: currentUser }: Props): JSX.Element => {
+  const { toast } = useToast()
+
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { users, totalUsers } = useAppSelector((state) => state)
@@ -47,6 +51,12 @@ export const Form = ({ user: currentUser }: Props): JSX.Element => {
 
         dispatch(saveUsers(updatedUsers))
         navigate(-1)
+
+        toast({
+          title: 'Success',
+          description: 'The user has been edited!',
+          status: 'success'
+        })
       } else {
         await api.post<Form.UserData>(values)
 
@@ -60,6 +70,12 @@ export const Form = ({ user: currentUser }: Props): JSX.Element => {
         dispatch(saveUsers([...users, newUser]))
         dispatch(incrementTotalUsers(1))
         navigate(-1)
+
+        toast({
+          title: 'Success',
+          description: 'The user has been created!',
+          status: 'success'
+        })
       }
     } catch (err) {
       console.log(err)

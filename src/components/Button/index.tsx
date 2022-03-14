@@ -1,22 +1,23 @@
 import { ComponentProps } from '@stitches/react'
-import { Button as BaseButton, LoadingSpinner } from './styles'
+import { forwardRef, ForwardRefRenderFunction } from 'react'
+import { Button as StyledButton, LoadingSpinner } from './styles'
 
-interface Props extends ComponentProps<typeof BaseButton> {
+interface Props extends ComponentProps<typeof StyledButton> {
   leftIcon?: React.ReactNode
   isLoading?: boolean
-  children: string
+  children: React.ReactNode
 }
 
-export const Button = ({
-  leftIcon,
-  isLoading,
-  children,
-  ...rest
-}: Props): JSX.Element => {
+const BaseButton: ForwardRefRenderFunction<HTMLButtonElement, Props> = (
+  { leftIcon, isLoading, children, ...rest },
+  ref
+): JSX.Element => {
   return (
-    <BaseButton disabled={isLoading} {...rest}>
+    <StyledButton ref={ref} disabled={isLoading} {...rest}>
       {leftIcon}
       {isLoading ? <LoadingSpinner /> : children}
-    </BaseButton>
+    </StyledButton>
   )
 }
+
+export const Button = forwardRef(BaseButton)
