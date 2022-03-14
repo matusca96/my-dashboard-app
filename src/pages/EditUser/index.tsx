@@ -1,16 +1,24 @@
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { useAppSelector } from '../../config/redux/store'
 
 import { Form } from '../../components/Form'
 import { Header } from '../../components/Header'
 import { Box, Flex, Separator, Text } from '../../components/Primitives'
+import { useEffect } from 'react'
 
 export const EditUser = (): JSX.Element => {
+  const navigate = useNavigate()
   const params = useParams<'id'>()
   const users = useAppSelector((state) => state.users)
 
   const selectedUser = users.find((user) => user.id === Number(params.id))
+
+  useEffect(() => {
+    if (!selectedUser) {
+      navigate(-1)
+    }
+  }, [selectedUser, navigate])
 
   return (
     <Flex
