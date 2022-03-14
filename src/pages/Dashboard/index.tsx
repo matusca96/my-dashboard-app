@@ -1,5 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Pencil1Icon, PlusIcon, TrashIcon } from '@radix-ui/react-icons'
+import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+  Pencil1Icon,
+  PlusIcon,
+  TrashIcon
+} from '@radix-ui/react-icons'
 import { useNavigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../config/redux/store'
@@ -29,6 +35,7 @@ export const Dashboard = (): JSX.Element => {
   const [selectedUser, setSelectedUser] = useState<Dashboard.User | undefined>(
     undefined
   )
+  const [sortByUsername, setSortByUsername] = useState<'asc' | 'desc'>('desc')
 
   const { toast } = useToast()
 
@@ -37,8 +44,13 @@ export const Dashboard = (): JSX.Element => {
   const { users, firstTimeLoaded } = useAppSelector((state) => state)
 
   const sortedUsers = useMemo(
-    () => [...users].sort((a, b) => a.username.localeCompare(b.username)),
-    [users]
+    () =>
+      [...users].sort((a, b) =>
+        sortByUsername === 'desc'
+          ? a.username.localeCompare(b.username)
+          : b.username.localeCompare(a.username)
+      ),
+    [users, sortByUsername]
   )
 
   const handleOnDeleteUser = async (): Promise<void> => {
@@ -126,7 +138,14 @@ export const Dashboard = (): JSX.Element => {
         }}
       >
         <Flex css={{ width: '100%', p: '$3', alignItems: 'center' }}>
-          <Text css={{ fontWeight: '$bold', fontSize: '$5', flex: 1 }}>
+          <Text
+            css={{
+              color: '$slate12',
+              fontWeight: '$bold',
+              fontSize: '$5',
+              flex: 1
+            }}
+          >
             Users
           </Text>
           <Button leftIcon={<PlusIcon />} onClick={() => navigate('/add')}>
@@ -158,7 +177,37 @@ export const Dashboard = (): JSX.Element => {
                   <Tr>
                     <Th>Id</Th>
                     <Th>Name</Th>
-                    <Th>Username</Th>
+                    <Th>
+                      <Flex
+                        css={{
+                          gap: '$2',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+
+                          color: '$slate11'
+                        }}
+                      >
+                        <Text css={{ fontWeight: '$medium', color: 'slate11' }}>
+                          Username
+                        </Text>
+                        <IconButton
+                          css={{ color: '$slate11' }}
+                          variant="ghost"
+                          icon={
+                            sortByUsername === 'asc' ? (
+                              <ArrowUpIcon />
+                            ) : (
+                              <ArrowDownIcon />
+                            )
+                          }
+                          onClick={() =>
+                            setSortByUsername((prevState) =>
+                              prevState === 'asc' ? 'desc' : 'asc'
+                            )
+                          }
+                        />
+                      </Flex>
+                    </Th>
                     <Th>City</Th>
                     <Th>Email</Th>
                     <Th />

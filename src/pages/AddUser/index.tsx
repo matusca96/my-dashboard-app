@@ -30,7 +30,14 @@ export const AddUser = (): JSX.Element => {
         }}
       >
         <Flex css={{ width: '100%', py: '$3', alignItems: 'center' }}>
-          <Text css={{ fontWeight: '$bold', fontSize: '$5', flex: 1 }}>
+          <Text
+            css={{
+              color: '$slate12',
+              fontWeight: '$bold',
+              fontSize: '$5',
+              flex: 1
+            }}
+          >
             Create new user
           </Text>
         </Flex>
