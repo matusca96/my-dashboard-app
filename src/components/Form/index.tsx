@@ -31,14 +31,14 @@ export const Form = ({ user: currentUser }: Props): JSX.Element => {
   const handleOnSubmit: SubmitHandler<Form.UserData> = async (values) => {
     try {
       if (currentUser) {
-        const response = await api.put<Form.UserData>(currentUser.id, values)
+        await api.put<Form.UserData>(values)
 
         const updatedUsers = users.map((user) => {
           if (user.id === currentUser.id) {
             return {
               ...user,
-              name: response.name,
-              email: response.email
+              name: values.name,
+              email: values.email
             }
           }
 

@@ -32,9 +32,10 @@ export const post = async <T>(body: T): Promise<T> => {
   })
 }
 
-export const put = async <T>(id: number, body: T): Promise<T> => {
+// fake put, the json api works only with ids between 1-10
+export const put = async <T>(body: T): Promise<T> => {
   return await fetchApi({
-    url: `${BASE_URL}/${id}`,
+    url: `${BASE_URL}/1`,
     options: {
       ...options,
       method: 'put',
