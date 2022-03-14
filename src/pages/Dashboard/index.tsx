@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Pencil1Icon, PlusIcon, TrashIcon } from '@radix-ui/react-icons'
 import { useNavigate } from 'react-router-dom'
 
@@ -35,6 +35,11 @@ export const Dashboard = (): JSX.Element => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { users, firstTimeLoaded } = useAppSelector((state) => state)
+
+  const sortedUsers = useMemo(
+    () => [...users].sort((a, b) => a.username.localeCompare(b.username)),
+    [users]
+  )
 
   const handleOnDeleteUser = async (): Promise<void> => {
     if (!selectedUser) return
@@ -169,7 +174,7 @@ export const Dashboard = (): JSX.Element => {
                       </TdNoResults>
                     </Tr>
                   ) : (
-                    users.map((user) => (
+                    sortedUsers.map((user) => (
                       <Tr key={user.id}>
                         <Td>{user.id}</Td>
                         <Td>{user.name}</Td>
