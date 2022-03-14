@@ -1,8 +1,10 @@
 declare namespace ThemeContext {
   type Data = {
-    theme: 'light' | 'dark'
+    theme: ThemeType
     toggleTheme: () => void
   }
+
+  type ThemeType = 'light' | 'dark'
 
   type Props = {
     children: import('react').ReactNode
