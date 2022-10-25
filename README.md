@@ -64,7 +64,7 @@ In progress.
 My name is **Matheus**, I'm from Brazil and I really enjoy building web/mobile applications. Get in touch with some of the social medias below:
 
 [![Instagram Badge](https://img.shields.io/badge/-matusca96-07824d?style=flat-square&logo=Instagram&logoColor=white&link=https://www.instagram.com/matusca96/)](https://www.instagram.com/matusca96/)
-[![Linkedin Badge](https://img.shields.io/badge/-Matheus%20Gomes-07824d?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/matheus-andr%C3%A9-gomes-ba5871112/)](https://www.linkedin.com/in/matheus-andr%C3%A9-gomes-ba5871112/)
+[![Linkedin Badge](https://img.shields.io/badge/-Matheus%20Gomes-07824d?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/matusca96/)](https://www.linkedin.com/in/matusca96/)
 [![Gmail Badge](https://img.shields.io/badge/-gomesloud@gmail.com-07824d?style=flat-square&logo=Gmail&logoColor=white&link=mailto:gomesloud@gmail.com)](mailto:gomesloud@gmail.com) 
 
 ### License ✅
